@@ -43,7 +43,7 @@ const UserSchema = new Schema({
 
 UserSchema.methods.toJSON = function () { // cuando se llame a toJson CONFIGRAMOS LOS ADATOS A MOSTRAR
   const {__v, _id, password, ...user} = this._doc
-  user.id = _id
+  user.id = _id.toJSON()
   return user
 }
 

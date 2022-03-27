@@ -1,0 +1,157 @@
+components:
+  schemas:
+    Quiz:
+      type: object
+      properties:
+        idquiz:
+          type: number
+          example: 1
+        title:
+          type: string
+          example: Titulo de quiz
+        description:
+          type: string
+          example: Descripcion del quiz
+        user_iduser:
+          type: string
+          example: fds23443224f3e
+          description: Id del usuario que creo el quiz
+
+paths:
+  /api/quiz:
+    get:
+      description: Get list of Quiz
+      tags:
+        - quiz
+      responses:
+        200:
+          description: Returns a list of Quiz
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  total:
+                    type: number
+                    example: 1
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Quiz'
+    post:
+      description: Create a quiz
+      tags:
+        - quiz
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - name
+                - userId
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                userId:
+                  type: string
+            examples:
+              test1:
+                value:
+                  title: Encuesta a estuadiantes
+                  description: Dirigido a los 5 ciclo
+
+      responses:
+        200:
+          description: return a quiz created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 'ok'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Quiz'
+  /api/quiz/{idquiz}:
+    put:
+      description: Edit quiz
+      tags:
+        - quiz
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: idquiz
+          description: id of quiz to edit
+          required: true
+          schema:
+            type: number
+            example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Nuevo Titulo
+                description:
+                  type: string
+                  example: nueva description
+      responses:
+        200:
+          description: Update success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Quiz'
+    delete:
+      description: delete quiz
+      tags:
+        - quiz
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: idquiz
+          description: id of quiz to delete
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          description: deleted success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Quiz'

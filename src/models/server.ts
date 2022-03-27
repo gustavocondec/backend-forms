@@ -15,6 +15,8 @@ export class Server {
   private apiUsersPath: string;
   private apiAuthPath: string;
   private apiRolesPath: string;
+  private apiQuizPath: string;
+  private apiAnswerQuizPath: string;
 
   constructor() {
     this.app = express()
@@ -22,6 +24,8 @@ export class Server {
     this.apiUsersPath = '/api/users'
     this.apiAuthPath = '/api/auth'
     this.apiRolesPath= '/api/roles'
+    this.apiQuizPath='/api/quiz'
+    this.apiAnswerQuizPath='/api/answerquiz'
   }
 
   async initialize() {
@@ -45,6 +49,8 @@ export class Server {
   async connectSql() {
     await sql.authenticate()
     await sql.sync({
+      // force: true,
+      logging: true,
       alter: true,
     })
   }
@@ -87,11 +93,15 @@ export class Server {
     this.app.use(this.apiUsersPath, require('../routes/users'))
     this.app.use(this.apiAuthPath, require('../routes/auth'))
     this.app.use(this.apiRolesPath, require('../routes/roles'))
+    this.app.use(this.apiQuizPath,require('../routes/quiz'))
+    this.app.use(this.apiAnswerQuizPath,require('../routes/answerquiz'))
+
   }
 
   handleErrors() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.app.use((err:any, req:Request, res:Response, next:NextFunction) => {
+      console.log(err)
       let responseError: ResponseError
       if (err instanceof CustomError) {
         responseError ={

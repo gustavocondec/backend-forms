@@ -22,11 +22,8 @@ export const validarJWT = async (req:Request, res:Response, next:NextFunction) =
     req.user = userAuthenticated.toJSON()
     return next()
   } catch (error) {
-    console.log(error)
-    res.status(401).json({
+    return res.status(401).json({
       msg: 'Token invalido'
     })
   }
-
-
 }

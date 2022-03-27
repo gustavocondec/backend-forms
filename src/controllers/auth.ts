@@ -18,7 +18,6 @@ export const login = async (req: Request, res: Response) => {
 
   // generar token
   const token = await generateJwt(user.id)
-  console.log('user en auth/login', user.toJSON())
   return res.json({
     token,
     user

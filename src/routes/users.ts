@@ -10,7 +10,7 @@ const router = Router()
 router.get('/', getUsers)
 
 
-router.post('/', [
+router.post('/',
   check('name', 'El nombre es obligatorio').not().isEmpty(),
   check('password', 'El password debe tener 6 caracteres').isLength({min: 6}),
   check('email', 'El correo no es valido').isEmail(),
@@ -20,7 +20,7 @@ router.post('/', [
   check('role').custom(isRoleValid),
   // Al final valida si hay errores en la validacion de express-validators(los check) y si hay lanza error
   validarCampos
-], postUsers)
+  , postUsers)
 
 router.put('/:id', [
   check('id', 'No es un ID Valido').isMongoId(),

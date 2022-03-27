@@ -16,7 +16,7 @@ export const createRoles = async () => {
     new Role({role: 'ADMIN_ROLE'}).save(),
   ]);
 
-  console.log('Roles were registered in the database: "ADMIN_ROLE" and "USER_ROLE"');
+  console.log('Roles are registered in the database: "ADMIN_ROLE" and "USER_ROLE"');
 };
 
 export const create_admin = async () => {

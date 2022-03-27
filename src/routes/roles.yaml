@@ -1,0 +1,9 @@
+paths:
+  /api/roles:
+    post:
+      description: Load Roles to DB
+      tags:
+        - roles
+      responses:
+        200:
+          description: Roles has Created
