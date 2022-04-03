@@ -17,6 +17,7 @@ export class Server {
   private apiRolesPath: string;
   private apiQuizPath: string;
   private apiAnswerQuizPath: string;
+  private apiQuestionPath: string;
 
   constructor() {
     this.app = express()
@@ -26,6 +27,7 @@ export class Server {
     this.apiRolesPath= '/api/roles'
     this.apiQuizPath='/api/quiz'
     this.apiAnswerQuizPath='/api/answerquiz'
+    this.apiQuestionPath='/api/question'
   }
 
   async initialize() {
@@ -51,7 +53,7 @@ export class Server {
     await sql.sync({
       force: true,
       logging: true,
-      alter: true,
+      alter: true
     })
   }
 
@@ -95,7 +97,7 @@ export class Server {
     this.app.use(this.apiRolesPath, require('../routes/roles'))
     this.app.use(this.apiQuizPath,require('../routes/quiz'))
     this.app.use(this.apiAnswerQuizPath,require('../routes/answerquiz'))
-
+    this.app.use(this.apiQuestionPath, require('../routes/question'))
   }
 
   handleErrors() {
