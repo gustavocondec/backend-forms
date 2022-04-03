@@ -49,7 +49,7 @@ export class Server {
   async connectSql() {
     await sql.authenticate()
     await sql.sync({
-      // force: true,
+      force: true,
       logging: true,
       alter: true,
     })

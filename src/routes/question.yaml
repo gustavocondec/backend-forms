@@ -1,0 +1,138 @@
+components:
+  schemas:
+    Question:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Cuantos años tienes?
+        description:
+          type: string
+          example: Indicar años en eneteros
+        options:
+          type: string
+          example: 1,2,3,4
+paths:
+  /api/question:
+    get:
+      description: Get listo of questions
+      tags:
+        - question
+      responses:
+        200:
+          description:
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                      example: Ok
+                    total:
+                      type: number
+                      example: 1
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Question'
+
+    post:
+      description: Create a new Question of Quiz
+      tags:
+        - question
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - description
+                - quiz_idquiz
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                options:
+                  type: string
+                quiz_idquiz:
+                  type: number
+
+  /api/question/{idquestion}:
+    put:
+      description: Edit question
+      tags:
+        - question
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: idquestion
+          description: id of question to edit
+          required: true
+          schema:
+            type: number
+            example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Nueva pregunta
+                description:
+                  type: string
+                  example: Nueva description
+                options:
+                  type: string
+                  example: Ate, San isidro, Breña
+      responses:
+        200:
+          description: Update Question Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Question'
+    delete:
+      description: delete question
+      tags:
+        - question
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: idquestion
+          description: id of the question to delete
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          description: deleted succes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Question'

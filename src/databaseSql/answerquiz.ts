@@ -6,19 +6,25 @@ const AnswerQuiz = sql.define('AnswerQuiz', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false,
-    autoIncrement: true
+    autoIncrement: true,
+    unique: true
   },
   date: {
     type: DataTypes.DATE,
     allowNull: false
   },
-  quiz_idquiz: { // key of quiz
+
+  quiz_idquiz: { // key of Quiz
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    primaryKey: true
   }
 }, {
   freezeTableName: true
 })
+
+
 export {
   AnswerQuiz
 }
+

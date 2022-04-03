@@ -27,4 +27,4 @@ router.delete('/:idquiz',[
   validarCampos
 ], deleteQuiz)
 
-module .exports = router
+module.exports = router

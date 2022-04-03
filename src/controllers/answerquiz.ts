@@ -1,4 +1,4 @@
-import {Request, Response} from 'express'
+import {NextFunction, Request, Response} from 'express'
 
 import {AnswerQuiz} from '../databaseSql/answerquiz'
 
@@ -15,16 +15,20 @@ export const getAnswerQuiz = async (req:Request, res: Response) => {
     msg: 'ok',
     data: quizAnswer
   })
-
+ 
 }
 
-export const createAnswerQuiz = async (req:Request, res: Response) => {
-  const {quiz_idquiz} = req.body
-  const newAnswerQuiz = await AnswerQuiz.create({date: new Date(), quiz_idquiz})
-  res.status(200).json({
-    msg: 'ok',
-    data: [
-      newAnswerQuiz
-    ]
-  })
+export const createAnswerQuiz = async (req:Request, res: Response, next: NextFunction) => {
+  try {
+    const {quiz_idquiz} = req.body
+    const newAnswerQuiz = await AnswerQuiz.create({date: new Date(), quiz_idquiz})
+    res.status(200).json({
+      msg: 'ok',
+      data: [
+        newAnswerQuiz
+      ]
+    })
+  } catch (e) {
+    next(e)
+  }
 }
