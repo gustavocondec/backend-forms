@@ -15,7 +15,8 @@
   "compileOnSave": true,
   "include": [
     "src",
-    "src/routes/*.yaml"
+    "src/routes/*.yaml",
+    //"test"
   ],
   "exclude": [
     "dist"

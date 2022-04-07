@@ -25,7 +25,7 @@ router.post('/',
 router.put('/:id', [
   check('id', 'No es un ID Valido').isMongoId(),
   check('id').custom(existUserById),
-  check('role').custom(isRoleValid), //depende de la logica validar o permitir si cambia de rol
+  //check('role').custom(isRoleValid), //depende de la logica validar o permitir si cambia de rol
   validarCampos
 ], putUsers)
 

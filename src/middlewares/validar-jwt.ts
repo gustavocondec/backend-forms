@@ -5,7 +5,7 @@ import {User} from '../databaseMongo/user'
 
 export const validarJWT = async (req:Request, res:Response, next:NextFunction) => {
   const bearer = req.header('Authorization')
-  if (!bearer) return res.status(400).json({
+  if (!bearer) return res.status(401).json({
     msg: 'Debe enviar token'
   })
   try {
@@ -15,7 +15,7 @@ export const validarJWT = async (req:Request, res:Response, next:NextFunction) =
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const userAuthenticated = await User.findById(payload.uid)
-    if (!userAuthenticated) return res.status(404).json({msg: 'no exite'})
+    if (!userAuthenticated) return res.status(404).json({msg: 'User not found'})
     if (userAuthenticated.isDeleted) return res.status(404).json({msg: 'User not found'})
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

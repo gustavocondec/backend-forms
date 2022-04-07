@@ -24,6 +24,11 @@ const Question = sql.define('Question',{
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false
+  },
+  typequestion_idtypequestion: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false
   }
 },{freezeTableName: true})
 

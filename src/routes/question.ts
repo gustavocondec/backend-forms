@@ -14,6 +14,8 @@ router.post('/',[
   check('title', 'Titulo es texto').isString(),
   check('description', 'Debe enviar la descripcion').not().isEmpty(),
   check('description', 'La descripcion es text').isString(),
+  check('quiz_idquiz','Es necesario el idquiz').isInt(),
+  check('typequestion_idtypequestion','Es necesario el tipo de pregunta').isInt(),
   validarCampos
 ], createQuestion)
 

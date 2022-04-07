@@ -20,22 +20,22 @@ paths:
         - question
       responses:
         200:
-          description:
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    msg:
-                      type: string
-                      example: Ok
-                    total:
-                      type: number
-                      example: 1
-                    data:
-                      type: array
-                      items:
-                        $ref: '#/components/schemas/Question'
+          description: get list of question
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Ok
+                  total:
+                    type: number
+                    example: 1
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Question'
 
     post:
       description: Create a new Question of Quiz
@@ -52,15 +52,37 @@ paths:
                 - title
                 - description
                 - quiz_idquiz
+                - typequestion_idtypequestion
               properties:
                 title:
                   type: string
+                  example: 'Cual es tu edad'
                 description:
                   type: string
+                  example: 'En años'
                 options:
                   type: string
                 quiz_idquiz:
                   type: number
+                  example: 1
+                typequestion_idtypequestion:
+                  type: number
+                  example: 1
+      responses:
+        200:
+          description: return question created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Question'
 
   /api/question/{idquestion}:
     put:

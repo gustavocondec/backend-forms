@@ -54,21 +54,21 @@ paths:
               type: object
               required:
                 - title
-                - name
-                - userId
+                - description
+                - user_iduser
               properties:
                 title:
                   type: string
                 description:
                   type: string
-                userId:
+                user_iduser:
                   type: string
             examples:
               test1:
                 value:
                   title: Encuesta a estuadiantes
                   description: Dirigido a los 5 ciclo
-
+                  user_iduser: 624d02f1fdb84e91a18e9d6d
       responses:
         200:
           description: return a quiz created

@@ -22,8 +22,8 @@ export const getQuestions = async (req:Request, res: Response, next: NextFunctio
 
 export const createQuestion = async (req:Request, res: Response, next: NextFunction) => {
   try {
-    const {title, description,options,quiz_idquiz} = req.body
-    const newQuestion = await Question.create({title,description,options,quiz_idquiz})
+    const {title, description,options,quiz_idquiz, typequestion_idtypequestion} = req.body
+    const newQuestion = await Question.create({title,description,options,quiz_idquiz, typequestion_idtypequestion})
     res.status(200).json({
       msg: 'ok',
       data: [newQuestion]

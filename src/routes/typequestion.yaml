@@ -1,0 +1,147 @@
+components:
+  schemas:
+    TypeQuestion:
+      type: object
+      properties:
+        idtypequestion:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: text
+        description:
+          type: string
+          example: Tipo texto
+paths:
+  /api/typequestion:
+    get:
+      description: Get listo of typequestions
+      tags:
+        - typequestion
+      responses:
+        200:
+          description: Get list of typequestion
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Ok
+                  total:
+                    type: number
+                    example: 1
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TypeQuestion'
+
+    post:
+      description: Create a new TypeQuestion
+      tags:
+        - typequestion
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - description
+              properties:
+                name:
+                  type: string
+                  example: string
+                description:
+                  type: string
+                  example: Pregunta de tipo textual
+      responses:
+        200:
+          description: return a typequetion created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TypeQuestion'
+
+  /api/typequestion/{idtypequestion}:
+    put:
+      description: Edit typequestion
+      tags:
+        - typequestion
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: idtypequestion
+          description: id of typequestion to edit
+          required: true
+          schema:
+            type: number
+            example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: checkbox
+                description:
+                  type: string
+                  example: Tipo check box, debe seleccionar los que desee
+      responses:
+        200:
+          description: Update TypeQuestion Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TypeQuestion'
+    delete:
+      description: delete typequestion
+      tags:
+        - typequestion
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: idtypequestion
+          description: id of the typequestion to delete
+          required: true
+          schema:
+            type: number
+            example: 1
+      responses:
+        200:
+          description: deleted succes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: ok
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TypeQuestion'

@@ -11,6 +11,7 @@ router.get('/', getQuizs)
 router.post('/', [
   check('title', 'El titulo es obligatorio').not().isEmpty(),
   check('description','Es necesario la descripcion').not().isEmpty(),
+  check('user_iduser', 'Debe enviar id de usuario que lo crea').not().isEmpty().isString(),
   validarJWT,
   validarCampos
 ],createQuiz)
