@@ -20,6 +20,7 @@ const Question = sql.define('Question',{
   options: {
     type: DataTypes.STRING
   },
+  /*
   quiz_idquiz: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -30,8 +31,26 @@ const Question = sql.define('Question',{
     primaryKey: true,
     allowNull: false
   }
-},{freezeTableName: true})
 
+   */
+},{freezeTableName: true})
+/*
+Question.hasMany(Answer, {
+  foreignKey: 'question_idquestion',
+  sourceKey: 'idquestion',
+  foreignKeyConstraint: true,
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
+})
+Question.hasMany(Answer, {
+  foreignKey: 'question_quiz_idquiz',
+  sourceKey: 'quiz_idquiz',
+  foreignKeyConstraint: true,
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
+})
+ */
 export {
   Question
 }
+

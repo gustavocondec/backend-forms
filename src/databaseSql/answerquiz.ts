@@ -14,16 +14,26 @@ const AnswerQuiz = sql.define('AnswerQuiz', {
     allowNull: false
   },
 
+  /*
   quiz_idquiz: { // key of Quiz
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true
   }
+   */
 }, {
   freezeTableName: true
 })
+/*
+AnswerQuiz.hasMany(Answer,{
+  foreignKey: 'answerquiz_idanswerquiz',
+  sourceKey: 'idanswerquiz',
+  foreignKeyConstraint: true,
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
+})
 
-
+ */
 export {
   AnswerQuiz
 }

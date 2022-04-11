@@ -19,6 +19,7 @@ export class Server {
   private apiAnswerQuizPath: string;
   private apiQuestionPath: string;
   private apiTypeQuestionPath: string;
+  private apiAnswerPath: string;
 
   constructor() {
     this.app = express()
@@ -30,6 +31,7 @@ export class Server {
     this.apiAnswerQuizPath='/api/answerquiz'
     this.apiQuestionPath='/api/question'
     this.apiTypeQuestionPath='/api/typequestion'
+    this.apiAnswerPath='/api/answer'
   }
 
   async initialize() {
@@ -39,10 +41,10 @@ export class Server {
     this.handleErrors()
     await this.connectMongoDB()
       .then(() => console.log('Conectado a MongoDB'))
-      .catch(() => console.error('Error conectando a MongoDB'))
+      .catch((e) => console.error('Error conectando a MongoDB',e))
     await this.connectSql()
       .then(() => console.log('Conectado a SQL'))
-      .catch(() => console.error('Error conectando a SQL'))
+      .catch((e) => console.error('Error conectando a SQL',e))
   }
 
   async connectMongoDB() {
@@ -52,9 +54,10 @@ export class Server {
 
   async connectSql() {
     await sql.authenticate()
+    await sql.drop()
     await sql.sync({
       force: true,
-      logging: false,
+      logging: true,
       alter: true
     })
   }
@@ -101,6 +104,7 @@ export class Server {
     this.app.use(this.apiAnswerQuizPath,require('../routes/answerquiz'))
     this.app.use(this.apiQuestionPath, require('../routes/question'))
     this.app.use(this.apiTypeQuestionPath, require('../routes/typequestion'))
+    this.app.use(this.apiAnswerPath, require('../routes/answer'))
   }
 
   handleErrors() {
