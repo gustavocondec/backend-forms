@@ -28,6 +28,7 @@ const AnswerQuiz = sql.define('AnswerQuiz', {
 AnswerQuiz.hasMany(Answer,{
   foreignKey: {
     field: 'answerquiz_idanswerquiz',
+    name: 'answerquiz_idanswerquiz',
     allowNull: false
   },
   sourceKey: 'idanswerquiz',
@@ -38,9 +39,12 @@ AnswerQuiz.hasMany(Answer,{
 Answer.belongsTo(AnswerQuiz, {
   foreignKey: {
     field: 'answerquiz_idanswerquiz',
+    name: 'answerquiz_idanswerquiz',
     allowNull: false
   },
-  targetKey: 'idanswerquiz'
+  targetKey: 'idanswerquiz',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
 })
 
 export {

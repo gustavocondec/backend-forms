@@ -32,7 +32,9 @@ Quiz.hasMany(Question, {
     name: 'quiz_idquiz',
     field: 'quiz_idquiz'
   },
-  sourceKey: 'idquiz'
+  sourceKey: 'idquiz',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
 })
 Question.belongsTo(Quiz, {
   foreignKey: {
@@ -40,7 +42,9 @@ Question.belongsTo(Quiz, {
     allowNull: false,
     field: 'quiz_idquiz'
   },
-  targetKey: 'idquiz'
+  targetKey: 'idquiz',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
 })
 
 
@@ -49,15 +53,21 @@ Quiz.hasMany(AnswerQuiz, {
   foreignKey: {
     field: 'quiz_idquiz',
     allowNull: false,
+    name: 'quiz_idquiz'
   },
-  sourceKey: 'idquiz'
+  sourceKey: 'idquiz',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
 })
 AnswerQuiz.belongsTo(Quiz, {
   foreignKey: {
     field: 'quiz_idquiz',
-    allowNull: false
+    allowNull: false,
+    name: 'quiz_idquiz'
   },
-  targetKey: 'idquiz'
+  targetKey: 'idquiz',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
 })
 
 export {

@@ -10,6 +10,9 @@ components:
           type: date
           example: 10/12/2020
           description: Fecha cuando se creo la respuesta
+        quiz_idquiz:
+          type: number
+          example: 1
 
 paths:
   /api/answerquiz:
@@ -52,6 +55,7 @@ paths:
                 quiz_idquiz:
                   type: number
                   description: idquiz de del quiz al cual se responde
+                  example: 1
       responses:
         200:
           description: Return a answerquiz created

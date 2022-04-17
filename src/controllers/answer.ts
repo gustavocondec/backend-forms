@@ -24,8 +24,8 @@ export const getAnswer = async (req:Request, res:Response, next: NextFunction) =
 
 export const createAnswer = async (req:Request, res: Response,next: NextFunction) => {
   try {
-    const {value, answerquiz_idanswerquiz,question_idquestion,question_quiz_idquiz} = req.body
-    const newAnswer = await Answer.create({value, answerquiz_idanswerquiz,question_idquestion,question_quiz_idquiz})
+    const {value, answerquiz_idanswerquiz,question_idquestion} = req.body
+    const newAnswer = await Answer.create({value, answerquiz_idanswerquiz,question_idquestion})
     res.status(200).json({
       msg: 'ok',
       data: [

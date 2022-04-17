@@ -24,7 +24,8 @@ const TypeQuestion = sql.define('TypeQuestion',{
 TypeQuestion.hasMany(Question, {
   foreignKey: {
     field: 'typequestion_idtypequestion',
-    allowNull: false
+    allowNull: false,
+    name: 'typequestion_idtypequestion'
   },
   sourceKey: 'idtypequestion',
   foreignKeyConstraint: true,
@@ -34,9 +35,13 @@ TypeQuestion.hasMany(Question, {
 Question.belongsTo(TypeQuestion, {
   foreignKey: {
     field: 'typequestion_idtypequestion',
-    allowNull: false
+    allowNull: false,
+    name: 'typequestion_idtypequestion'
+
   },
-  targetKey: 'idtypequestion'
+  targetKey: 'idtypequestion',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
 })
 
 export {

@@ -12,10 +12,10 @@ router.get('/',[
 
 router.post('/', [
   validarJWT,
-  check(['value','answerquiz_idanswerquiz','question_idquestion','question_quiz_idquiz'],
+  check(['value','answerquiz_idanswerquiz','question_idquestion'],
     'Debe enviar los campos completos').not().isEmpty(),
   check('value', 'Debe ser text').isString(),
-  check(['value','answerquiz_idanswerquiz','question_idquestion','question_quiz_idquiz'],
+  check(['answerquiz_idanswerquiz','question_idquestion'],
     'debe ser numero').isInt(),
   validarCampos
 ], createAnswer)

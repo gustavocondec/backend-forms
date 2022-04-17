@@ -16,9 +16,6 @@ components:
         question_idquestion:
           type: number
           example: 1
-        question_quiz_idquiz:
-          type: number
-          example: 1
 paths:
   /api/answer:
     get:
@@ -58,7 +55,6 @@ paths:
                 - value
                 - answerquiz_idanswerquiz
                 - question_idquestion
-                - question_quiz_idquiz
               properties:
                 value:
                   type: string
@@ -71,10 +67,6 @@ paths:
                   type: number
                   example: 1
                   description: id de la question que responde
-                question_quiz_idquiz:
-                  type: number
-                  example: 1
-                  description: id del quiz al que pertenece question
 
       responses:
         200:

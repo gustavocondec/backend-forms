@@ -119,7 +119,14 @@ export class Server {
           status: err.status,
           errors: err.errors
         }
-      } else { //instanceof Error
+      } else if (['SequelizeForeignKeyConstraintError'].includes(err?.name)) {
+        responseError = {
+          msg: 'Error SequelizeForeignKeyConstraintError , el id referenciado no exite',
+          status: 400,
+          errors: []
+        }
+      }
+      else { //instanceof Error
         responseError = {
           msg: 'Ocurrio un error inesperado',
           status: 500,

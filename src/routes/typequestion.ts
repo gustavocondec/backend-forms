@@ -10,6 +10,7 @@ router.get('/', getTypeQuestion)
 router.post('/',[
   check('name','Debe enviar name').not().isEmpty(),
   check('description','Debe enviar description').not().isEmpty(),
+  check(['name','description'], 'Envie campos en formato adecuado').isString(),
   validarJWT,
   validarCampos
 ], createTypeQuestion)

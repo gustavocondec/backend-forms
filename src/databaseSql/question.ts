@@ -62,7 +62,9 @@ Answer.belongsTo(Question, {
     allowNull: false,
     field: 'question_idquestion'
   },
-  targetKey: 'idquestion'
+  targetKey: 'idquestion',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
 })
 
 export {
