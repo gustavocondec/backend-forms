@@ -1,0 +1,5 @@
+dispatch:
+  - url: "develop.forms-api.codeart.dev/*"
+    service: backend-forms-develop
+  - url: "forms-api.codeart.dev/*"
+    service: backend-forms-master
