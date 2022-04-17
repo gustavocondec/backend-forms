@@ -20,10 +20,26 @@ const TypeQuestion = sql.define('TypeQuestion',{
   }
 }, {freezeTableName: true})
 
+
 TypeQuestion.hasMany(Question, {
-  foreignKey: 'typequestion_idtypequestion',
+  foreignKey: {
+    field: 'typequestion_idtypequestion',
+    allowNull: false,
+    name: 'typequestion_idtypequestion'
+  },
   sourceKey: 'idtypequestion',
   foreignKeyConstraint: true,
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION'
+})
+Question.belongsTo(TypeQuestion, {
+  foreignKey: {
+    field: 'typequestion_idtypequestion',
+    allowNull: false,
+    name: 'typequestion_idtypequestion'
+
+  },
+  targetKey: 'idtypequestion',
   onUpdate: 'CASCADE',
   onDelete: 'NO ACTION'
 })

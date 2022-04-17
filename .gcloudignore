@@ -16,5 +16,5 @@
 # Node.js dependencies:
 node_modules/
 .example.env
-app.yaml
-cloudbuild.yaml
+app-develop.yaml
+cloudbuild-develop.yaml

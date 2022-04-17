@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express'
-import {Question} from '../databaseSql/question';
+import {Question} from '../databaseSql';
 
 export const getQuestions = async (req:Request, res: Response, next: NextFunction) => {
   try {

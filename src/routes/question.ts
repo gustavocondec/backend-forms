@@ -10,12 +10,9 @@ router.get('/',getQuestions)
 
 router.post('/',[
   validarJWT,
-  check('title', 'Debe enviar el titulo').not().isEmpty(),
-  check('title', 'Titulo es texto').isString(),
-  check('description', 'Debe enviar la descripcion').not().isEmpty(),
-  check('description', 'La descripcion es text').isString(),
-  check('quiz_idquiz','Es necesario el idquiz').isInt(),
-  check('typequestion_idtypequestion','Es necesario el tipo de pregunta').isInt(),
+  check(['title', 'description','quiz_idquiz','typequestion_idtypequestion'], 'Debe enviar los campos requeridos').not().isEmpty(),
+  check(['title', 'description'], 'Enviar campos en formato adecuado').isString(),
+  check(['quiz_idquiz', 'typequestion_idtypequestion'],'Enviar campos en formato adecuado').isInt(),
   validarCampos
 ], createQuestion)
 

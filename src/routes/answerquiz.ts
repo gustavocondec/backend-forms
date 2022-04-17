@@ -13,7 +13,8 @@ router.get('/',[
 
 router.post('/',[
   validarJWT,
-  check('quiz_idquiz','Es necesario enviar el id quiz que se responde').not().isEmpty()
+  check('quiz_idquiz','Es necesario enviar el id quiz que se responde').not().isEmpty(),
+  check('quiz_idquiz','Verifique tipo de campo').isInt()
 ], createAnswerQuiz)
 
 

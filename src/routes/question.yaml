@@ -12,6 +12,12 @@ components:
         options:
           type: string
           example: 1,2,3,4
+        quiz_idquiz:
+          type: number
+          example: 1
+        typequestion_idtypequestion:
+          type: number
+          example: 1
 paths:
   /api/question:
     get:

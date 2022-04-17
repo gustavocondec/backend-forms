@@ -24,6 +24,7 @@
     "mongoose": "^6.1.7",
     "mysql2": "^2.3.3",
     "sequelize": "^6.17.0",
+    "sequelize-cli": "^6.4.1",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
   },

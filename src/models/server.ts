@@ -1,6 +1,6 @@
 import {NextFunction, Response,Request} from 'express';
 import * as express from 'express'
-import {sql} from '../databaseSql/config';
+import {sql} from '../databaseSql';
 import * as cors from 'cors'
 import * as swaggerJsdoc from 'swagger-jsdoc'
 import * as swaggerUiExpress from 'swagger-ui-express'
@@ -14,11 +14,12 @@ export class Server {
   private port: string | number;
   private apiUsersPath: string;
   private apiAuthPath: string;
-  private apiRolesPath: string;
+  private readonly apiRolesPath: string;
   private apiQuizPath: string;
   private apiAnswerQuizPath: string;
   private apiQuestionPath: string;
   private apiTypeQuestionPath: string;
+  private apiAnswerPath: string;
 
   constructor() {
     this.app = express()
@@ -30,6 +31,7 @@ export class Server {
     this.apiAnswerQuizPath='/api/answerquiz'
     this.apiQuestionPath='/api/question'
     this.apiTypeQuestionPath='/api/typequestion'
+    this.apiAnswerPath='/api/answer'
   }
 
   async initialize() {
@@ -39,10 +41,10 @@ export class Server {
     this.handleErrors()
     await this.connectMongoDB()
       .then(() => console.log('Conectado a MongoDB'))
-      .catch(() => console.error('Error conectando a MongoDB'))
+      .catch((e) => console.error('Error conectando a MongoDB',e))
     await this.connectSql()
       .then(() => console.log('Conectado a SQL'))
-      .catch(() => console.error('Error conectando a SQL'))
+      .catch((e) => console.error('Error conectando a SQL',e))
   }
 
   async connectMongoDB() {
@@ -52,6 +54,8 @@ export class Server {
 
   async connectSql() {
     await sql.authenticate()
+    await sql.drop()
+    console.log('LLama Sync')
     await sql.sync({
       force: true,
       logging: false,
@@ -101,6 +105,7 @@ export class Server {
     this.app.use(this.apiAnswerQuizPath,require('../routes/answerquiz'))
     this.app.use(this.apiQuestionPath, require('../routes/question'))
     this.app.use(this.apiTypeQuestionPath, require('../routes/typequestion'))
+    this.app.use(this.apiAnswerPath, require('../routes/answer'))
   }
 
   handleErrors() {
@@ -114,7 +119,14 @@ export class Server {
           status: err.status,
           errors: err.errors
         }
-      } else { //instanceof Error
+      } else if (['SequelizeForeignKeyConstraintError'].includes(err?.name)) {
+        responseError = {
+          msg: 'Error SequelizeForeignKeyConstraintError , el id referenciado no exite',
+          status: 400,
+          errors: []
+        }
+      }
+      else { //instanceof Error
         responseError = {
           msg: 'Ocurrio un error inesperado',
           status: 500,
