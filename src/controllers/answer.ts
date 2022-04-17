@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express'
 
-import {Answer} from '../databaseSql/answer';
+import {Answer} from '../databaseSql';
 
 export const getAnswer = async (req:Request, res:Response, next: NextFunction) => {
   try {

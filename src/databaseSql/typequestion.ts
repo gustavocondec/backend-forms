@@ -1,5 +1,6 @@
 import {DataTypes} from 'sequelize';
 import {sql} from './config'
+import {Question} from './question';
 
 const TypeQuestion = sql.define('TypeQuestion',{
   idtypequestion: {
@@ -19,15 +20,24 @@ const TypeQuestion = sql.define('TypeQuestion',{
   }
 }, {freezeTableName: true})
 
-/*
+
 TypeQuestion.hasMany(Question, {
-  foreignKey: 'typequestion_idtypequestion',
+  foreignKey: {
+    field: 'typequestion_idtypequestion',
+    allowNull: false
+  },
   sourceKey: 'idtypequestion',
   foreignKeyConstraint: true,
   onUpdate: 'CASCADE',
   onDelete: 'NO ACTION'
 })
- */
+Question.belongsTo(TypeQuestion, {
+  foreignKey: {
+    field: 'typequestion_idtypequestion',
+    allowNull: false
+  },
+  targetKey: 'idtypequestion'
+})
 
 export {
   TypeQuestion

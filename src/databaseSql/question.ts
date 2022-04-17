@@ -1,5 +1,6 @@
 import {DataTypes} from 'sequelize';
 import {sql} from './config'
+import {Answer} from './answer';
 
 const Question = sql.define('Question',{
   idquestion: {
@@ -7,7 +8,6 @@ const Question = sql.define('Question',{
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
-    unique: true
   },
   title: {
     type: DataTypes.STRING,
@@ -20,12 +20,19 @@ const Question = sql.define('Question',{
   options: {
     type: DataTypes.STRING
   },
+
   /*
+
   quiz_idquiz: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
-    allowNull: false
+    //primaryKey: true,
+    allowNull: false,
+    references: {
+      model: Quiz,
+      key: 'idquiz'
+    },
   },
+
   typequestion_idtypequestion: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -34,22 +41,30 @@ const Question = sql.define('Question',{
 
    */
 },{freezeTableName: true})
-/*
+
+
+
+
 Question.hasMany(Answer, {
-  foreignKey: 'question_idquestion',
+  foreignKey: {
+    name: 'question_idquestion',
+    field: 'question_idquestion',
+    allowNull: false
+  },
   sourceKey: 'idquestion',
   foreignKeyConstraint: true,
   onUpdate: 'CASCADE',
   onDelete: 'NO ACTION'
 })
-Question.hasMany(Answer, {
-  foreignKey: 'question_quiz_idquiz',
-  sourceKey: 'quiz_idquiz',
-  foreignKeyConstraint: true,
-  onUpdate: 'CASCADE',
-  onDelete: 'NO ACTION'
+Answer.belongsTo(Question, {
+  foreignKey: {
+    name: 'question_idquestion',
+    allowNull: false,
+    field: 'question_idquestion'
+  },
+  targetKey: 'idquestion'
 })
- */
+
 export {
   Question
 }

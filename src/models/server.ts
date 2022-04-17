@@ -1,6 +1,6 @@
 import {NextFunction, Response,Request} from 'express';
 import * as express from 'express'
-import {sql} from '../databaseSql/config';
+import {sql} from '../databaseSql';
 import * as cors from 'cors'
 import * as swaggerJsdoc from 'swagger-jsdoc'
 import * as swaggerUiExpress from 'swagger-ui-express'
@@ -14,7 +14,7 @@ export class Server {
   private port: string | number;
   private apiUsersPath: string;
   private apiAuthPath: string;
-  private apiRolesPath: string;
+  private readonly apiRolesPath: string;
   private apiQuizPath: string;
   private apiAnswerQuizPath: string;
   private apiQuestionPath: string;
@@ -55,9 +55,10 @@ export class Server {
   async connectSql() {
     await sql.authenticate()
     await sql.drop()
+    console.log('LLama Sync')
     await sql.sync({
       force: true,
-      logging: true,
+      logging: false,
       alter: true
     })
   }

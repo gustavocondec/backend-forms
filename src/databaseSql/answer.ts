@@ -13,12 +13,17 @@ const Answer = sql.define('Answer', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  /*
+/*
   answerquiz_idanswerquiz: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    allowNull: false
+    allowNull: false,
+    references: {
+      model: 'AnswerQuiz',
+      key: 'idanswerquiz'
+    }
   },
+
   question_idquestion: {
     type: DataTypes.INTEGER,
     primaryKey: true,
